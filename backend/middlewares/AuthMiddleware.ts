@@ -15,6 +15,13 @@ export class AuthMiddleware {
 
     if (!token) throw new AuthError("Token missing");
 
-    return this.jwtService.verify(token) as AuthPayload;
+    try {
+      return this.jwtService.verify(token) as AuthPayload;
+    } catch (error: any) {
+      if (error.name === "TokenExpiredError") {
+        throw new AuthError("Token expired");
+      }
+      throw new AuthError("Invalid token");
+    }
   }
 }
