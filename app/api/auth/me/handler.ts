@@ -9,7 +9,7 @@ export class MeHandler {
   ) {}
 
   async get(req: Request) {
-    const payload = this.auth.verify(req);
+    const payload = this.auth.verify(req) as { userId: string };
     const user = await this.users.findById(payload.userId);
 
     return Response.json({ user });
