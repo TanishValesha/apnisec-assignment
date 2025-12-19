@@ -1,4 +1,4 @@
-import { ValidationError } from "../error/ValidationError";
+import { ValidationError } from "../../error/ValidationError";
 
 export class RegisterValidator {
   validate(data: any) {

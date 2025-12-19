@@ -2,7 +2,7 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 import { AppError } from "@/backend/error/AppError";
-import { AuthFactory } from "@/backend/factories/AuthFactory";
+import { AuthFactory } from "@/backend/factories/auth/AuthFactory";
 
 export async function POST(req: Request) {
   try {

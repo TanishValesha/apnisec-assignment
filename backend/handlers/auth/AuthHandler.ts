@@ -1,6 +1,6 @@
-import { AuthService } from "../services/AuthService";
-import { LoginValidator } from "../validators/LoginValidator";
-import { RegisterValidator } from "../validators/RegisterValidator";
+import { AuthService } from "../../services/auth/AuthService";
+import { LoginValidator } from "../../validators/auth/LoginValidator";
+import { RegisterValidator } from "../../validators/auth/RegisterValidator";
 
 export class AuthHandler {
   constructor(

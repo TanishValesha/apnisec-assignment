@@ -1,8 +1,8 @@
-import { AuthError } from "../error/AuthError";
-import { UserRepository } from "../repositories/UserRepository";
-import { LoginDTO, RegisterDTO } from "../types/auth.types";
-import { JWTService } from "../utils/JWTService";
-import { PasswordService } from "../utils/PasswordService";
+import { AuthError } from "../../error/AuthError";
+import { UserRepository } from "../../repositories/UserRepository";
+import { LoginDTO, RegisterDTO } from "../../types/auth.types";
+import { JWTService } from "../../utils/JWTService";
+import { PasswordService } from "../../utils/PasswordService";
 
 
 export class AuthService {

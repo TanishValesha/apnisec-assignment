@@ -23,8 +23,8 @@ model Issue {
   title       String
   description String
   type        String
-  priority    String
-  status      String
+  priority    String?
+  status      String?
   userId      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
