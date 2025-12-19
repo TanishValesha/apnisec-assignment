@@ -1,0 +1,16 @@
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+import { AppError } from "@/backend/error/AppError";
+import { AuthFactory } from "@/backend/factories/AuthFactory";
+
+export async function POST(req: Request) {
+  try {
+    return await AuthFactory.createAuthHandler().register(req);
+  } catch (err: any) {
+    if (err instanceof AppError) {
+      return Response.json({ message: err.message }, { status: err.statusCode });
+    }
+    return Response.json({ message: "Server error", err: err.message }, { status: 500 });
+  }
+}
