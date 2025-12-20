@@ -1,15 +1,16 @@
 import { AuthMiddleware, AuthPayload } from "@/backend/middlewares/AuthMiddleware";
+import { RateLimitMiddleware } from "@/backend/middlewares/RateLimitMiddleware";
 import { IssueService } from "@/backend/services/issues/IssueService";
 import { CreateIssueValidator } from "@/backend/validators/issues/CreateIssueValidator";
 import { IssueTypeValidator } from "@/backend/validators/issues/IssueTypeValidator";
-import { count } from "console";
 
 export class IssueHandler {
   constructor(
     private readonly service: IssueService,
     private readonly validator: CreateIssueValidator,
     private readonly typeValidator: IssueTypeValidator,
-    private readonly auth: AuthMiddleware
+    private readonly auth: AuthMiddleware,
+    private readonly rateLimit: RateLimitMiddleware
   ) {}
 
   async create(req: Request) {
@@ -23,6 +24,7 @@ export class IssueHandler {
   }
 
   async list(req: Request) {
+    const rateHeaders = this.rateLimit.check(req)
     const user = this.auth.verify(req) as AuthPayload;
     const { searchParams } = new URL(req.url);
     const type = searchParams.get("type") || undefined;
@@ -32,7 +34,7 @@ export class IssueHandler {
     }
 
     const issues = await this.service.getIssues(user.userId, type);
-    return Response.json({"count": issues.length, "issues": issues}, { status: 200 });
+    return Response.json({"count": issues.length, "issues": issues, "headers": rateHeaders}, { status: 200 });
   }
 
   async get(req: Request, id: string) {

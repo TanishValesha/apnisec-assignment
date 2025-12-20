@@ -5,6 +5,7 @@ import { IssueService } from "@/backend/services/issues/IssueService";
 import { JWTService } from "@/backend/utils/JWTService";
 import { CreateIssueValidator } from "@/backend/validators/issues/CreateIssueValidator";
 import { IssueTypeValidator } from "@/backend/validators/issues/IssueTypeValidator";
+import { RateLimitFactory } from "../RateLimitFactory";
 
 
 export class IssueFactory {
@@ -13,7 +14,8 @@ export class IssueFactory {
       new IssueService(new IssueRepository()),
       new CreateIssueValidator(),
       new IssueTypeValidator(),
-      new AuthMiddleware(new JWTService())
+      new AuthMiddleware(new JWTService()),
+      RateLimitFactory.createDefault()
     );
   }
 }
