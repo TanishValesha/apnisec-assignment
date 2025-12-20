@@ -15,7 +15,7 @@ export class IssueFactory {
       new CreateIssueValidator(),
       new IssueTypeValidator(),
       new AuthMiddleware(new JWTService()),
-      RateLimitFactory.createDefault()
+      RateLimitFactory.issueRead(),
     );
   }
 }

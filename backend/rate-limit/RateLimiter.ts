@@ -35,6 +35,6 @@ export class RateLimiter {
       remaining: this.limit - record.count,
       resetAt: record.resetAt,
     };
-    
+
   }
 }

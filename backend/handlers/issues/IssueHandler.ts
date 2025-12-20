@@ -24,7 +24,6 @@ export class IssueHandler {
   }
 
   async list(req: Request) {
-    const rateHeaders = this.rateLimit.check(req)
     const user = this.auth.verify(req) as AuthPayload;
     const { searchParams } = new URL(req.url);
     const type = searchParams.get("type") || undefined;

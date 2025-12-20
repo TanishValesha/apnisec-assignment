@@ -1,15 +1,15 @@
 import { RateLimiter } from "../rate-limit/RateLimiter";
 
 export class RateLimitMiddleware {
-  constructor(private readonly limiter: RateLimiter) {}
+  constructor(
+    private readonly limiter: RateLimiter,
+    private readonly reqScope: string
+  ) {}
 
-  check(req: Request) {
-    const ip =
-      req.headers.get("x-forwarded-for") ||
-      req.headers.get("x-real-ip") ||
-      "unknown";
-
-    const result = this.limiter.check(ip);
+  check(identity: string) {
+    const key =  `${identity}:${this.reqScope}`;
+  
+    const result = this.limiter.check(key);
 
     return {
       "X-RateLimit-Limit": String(result.limit),
