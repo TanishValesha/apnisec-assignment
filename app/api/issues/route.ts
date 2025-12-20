@@ -3,7 +3,7 @@ import { IssueFactory } from "@/backend/factories/issues/IssueFactory";
 
 export async function GET(req: Request) {
   try {
-    return await IssueFactory.issueHandler().list(req);
+    return await IssueFactory.readHandler().list(req);
   } catch (e: any) {
     if (e instanceof AppError)
       return Response.json({ message: e.message }, { status: e.statusCode });
@@ -13,7 +13,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    return await IssueFactory.issueHandler().create(req);
+    return await IssueFactory.writeHandler().create(req);
   } catch (e: any) {
     if (e instanceof AppError)
       return Response.json({ message: e.message }, { status: e.statusCode });
