@@ -20,7 +20,7 @@ export class AuthHandler {
     const body = await req.json();
 
     const rateHeaders = this.rateLimit.check(
-      `ip:${ip}:auth:register:${body.email}`
+      `ip:${ip}:auth:register`
     );
 
     this.registerValidator.validate(body);
@@ -38,7 +38,7 @@ export class AuthHandler {
     const body = await req.json();
 
     const rateHeaders = this.rateLimit.check(
-      `ip:${ip}:auth:login:${body.email}`
+      `ip:${ip}:auth:login`
     );
 
     this.loginValidator.validate(body);
