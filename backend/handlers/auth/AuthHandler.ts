@@ -27,9 +27,13 @@ export class AuthHandler {
 
     this.registerValidator.validate(body);
 
-    await this.emailService.sendWelcomeEmail(body.email, body.name)
-
     const token = await this.authService.register(body);
+
+    try {
+      await this.emailService.sendWelcomeEmail(body.email, body.name)
+    } catch (error) {
+      console.error("Failed to send welcome email:", error);
+    }
     return Response.json({ token, rateHeaders }, { status: 201 });
   }
 

@@ -22,7 +22,7 @@ export class EmailTemplates {
 
   static profileUpdated(data: ProfileUpdatedEmailData) {
     return `
-      <h2>Profile Updated for ${data.email}</h2>
+      <h2>Profile Updated</h2>
       <p>${data.name ? `Hello ${data.name},` : "Hello,"}</p>
       <p>Your profile information has been updated successfully.</p>
     `;
