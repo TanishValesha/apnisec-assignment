@@ -16,6 +16,8 @@ export class RateLimitFactory {
     );
   }
 
+  
+
   static issueWrite() {
     return new RateLimitMiddleware(
       new RateLimiter(
