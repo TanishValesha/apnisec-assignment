@@ -2,13 +2,15 @@ import { RateLimitMiddleware } from "@/backend/middlewares/RateLimitMiddleware";
 import { AuthService } from "../../services/auth/AuthService";
 import { LoginValidator } from "../../validators/auth/LoginValidator";
 import { RegisterValidator } from "../../validators/auth/RegisterValidator";
+import { EmailService } from "@/backend/services/email/EmailService";
 
 export class AuthHandler {
   constructor(
     private readonly authService: AuthService,
     private readonly registerValidator: RegisterValidator,
     private readonly loginValidator: LoginValidator,
-    private readonly rateLimit: RateLimitMiddleware
+    private readonly rateLimit: RateLimitMiddleware,
+    private readonly emailService: EmailService
   ) {}
 
   async register(req: Request) {
@@ -24,6 +26,8 @@ export class AuthHandler {
     );
 
     this.registerValidator.validate(body);
+
+    await this.emailService.sendWelcomeEmail(body.email, body.name)
 
     const token = await this.authService.register(body);
     return Response.json({ token, rateHeaders }, { status: 201 });

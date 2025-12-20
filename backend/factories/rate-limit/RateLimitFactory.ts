@@ -1,6 +1,6 @@
-import { RateLimiter } from "../rate-limit/RateLimiter";
-import { RateLimitMiddleware } from "../middlewares/RateLimitMiddleware";
-import { rateLimitStore } from "../rate-limit/rateLimitStoreSingleton";
+import { RateLimiter } from "../../rate-limit/RateLimiter";
+import { RateLimitMiddleware } from "../../middlewares/RateLimitMiddleware";
+import { rateLimitStore } from "../../rate-limit/rateLimitStoreSingleton";
 
 const WINDOW_MS_15_MINUTES = 15 * 60 * 1000;
 

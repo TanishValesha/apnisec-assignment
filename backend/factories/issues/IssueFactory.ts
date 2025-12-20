@@ -5,7 +5,7 @@ import { IssueService } from "@/backend/services/issues/IssueService";
 import { JWTService } from "@/backend/utils/JWTService";
 import { CreateIssueValidator } from "@/backend/validators/issues/CreateIssueValidator";
 import { IssueTypeValidator } from "@/backend/validators/issues/IssueTypeValidator";
-import { RateLimitFactory } from "../RateLimitFactory";
+import { RateLimitFactory } from "../rate-limit/RateLimitFactory";
 import { IssueWriteHandler } from "@/backend/handlers/issues/IssueWriteHandler";
 
 

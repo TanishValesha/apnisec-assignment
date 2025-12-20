@@ -6,7 +6,8 @@ import { JWTService } from "@/backend/utils/JWTService";
 import { PasswordService } from "@/backend/utils/PasswordService";
 import { LoginValidator } from "@/backend/validators/auth/LoginValidator";
 import { RegisterValidator } from "@/backend/validators/auth/RegisterValidator";
-import { RateLimitFactory } from "../RateLimitFactory";
+import { RateLimitFactory } from "../rate-limit/RateLimitFactory";
+import { EmailFactory } from "../email/EmailFactory";
 
 export class AuthFactory {
   static createAuthHandler() {
@@ -18,7 +19,8 @@ export class AuthFactory {
       ),
       new RegisterValidator(),
       new LoginValidator(),
-      RateLimitFactory.authLimit()
+      RateLimitFactory.authLimit(),
+      EmailFactory.create()
     );
   }
 }
